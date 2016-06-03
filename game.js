@@ -40,8 +40,18 @@ var timeLeftText;
 var alertText;
 var timeUpText;
 
+// Load status
+var loadText;
+
 var Game = {
     preload: function () {
+        // Set loadText
+        loadText = game.add.text(350, 300, '', { fill: '#ffffff' });
+        game.load.onLoadStart.add(this.loadStart);
+        game.load.onFileComplete.add(this.fileComplete);
+        game.load.onLoadComplete.add(this.loadComplete);
+
+
         // Background Play Game
         game.load.image('playBg', 'Resource/Background/BackgroundPlayGame.jpg');
         // Grid
@@ -73,6 +83,18 @@ var Game = {
         game.load.image('timeBar', 'Resource/Supports/HealthBar.jpg')
         game.load.bitmapFont('desyrel', 'Resource/Fonts/desyrel.png', 'Resource/Fonts/desyrel.xml');
         game.load.bitmapFont('desyrel-pink', 'Resource/Fonts/desyrel-pink.png', 'Resource/Fonts/desyrel-pink.xml');
+    },
+
+    loadStart: function() {
+        loadText.text = 'Loading...';
+    },
+
+    fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
+        loadText.text = 'Complete: ' + progress + '%';
+    },
+
+    loadComplete: function() {
+        loadText.text = '';
     },
 
     create: function () {

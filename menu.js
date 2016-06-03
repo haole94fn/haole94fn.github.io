@@ -1,6 +1,13 @@
 ﻿var emitterMenu;
+var loadTextMenu;
 var Menu = {
     preload: function () {
+        // Set loadText
+        loadTextMenu = game.add.text(350, 300, '', { fill: '#ffffff' });
+        game.load.onLoadStart.add(this.loadStart);
+        game.load.onFileComplete.add(this.fileComplete);
+        game.load.onLoadComplete.add(this.loadComplete);
+
         game.load.image('titleBg', 'Resource/Background/BackgroundMenu.jpg');
         game.load.image('startB', 'Resource/Menu/StartGame.png');
         game.load.image('title', 'Resource/Menu/LogoMenu.png');
@@ -12,6 +19,18 @@ var Menu = {
         game.load.image('red', 'Resource/Diamonds/Red.png');
         game.load.image('white', 'Resource/Diamonds/White.png');
         game.load.image('yellow', 'Resource/Diamonds/Yellow.png');
+    },
+
+    loadStart: function () {
+        loadTextMenu.text = 'Loading...';
+    },
+
+    fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
+        loadTextMenu.text = 'Complete: ' + progress + '%';
+    },
+
+    loadComplete: function () {
+        loadTextMenu.text = '';
     },
 
     create: function () {
