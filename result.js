@@ -7,7 +7,7 @@ var Result = {
     },
 
     preload: function () {
-        game.load.image('resultBg', 'Resource/Background/BackgroundHighScore.jpg');
+        game.load.image('resultBg', 'Resource/Background/BackGroundHighScore.jpg');
         game.load.image('exit', 'Resource/Menu/Exit.png');
         game.load.bitmapFont('desyrel', 'Resource/Fonts/desyrel.png', 'Resource/Fonts/desyrel.xml');
     },
